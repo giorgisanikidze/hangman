@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './App.css';
 import words from './WordList.json'
-import { hover } from '@testing-library/user-event/dist/hover';
 
 function App() {
   const wordToGuess = useState(words[Math.floor(Math.random() * words.length)])
@@ -54,15 +53,13 @@ function App() {
 
   return (
     <>
-      <div style={{display: isLooser || isWinner ? 'flex' : 'none', gap: '30px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',  position: 'absolute', width: '500px', height: '500px', backgroundColor: 'red', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: '3', padding: '20px' }}>
+      <div style={{display: isLooser || isWinner ? 'flex' : 'none', borderRadius: '20px', gap: '30px', flexDirection: 'column', justifyContent: 'center', alignItems: 'center',  position: 'absolute', width: '500px', height: '500px', backgroundColor: 'green', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: '3', padding: '20px' }}>
         <h1 style={{fontSize: '50px'}}>
           {isLooser && 'you Lost'}
-          
           {isWinner && 'you win'}
-
         </h1>
         <h1 style={{fontSize: '50px'}}>{isLooser && `word was "${wordToGuess[0]}"` }</h1>
-        <button style={{padding: '20px 60px',border: 'none', borderRadius: '20px', backgroundColor: 'green', color: 'white'}} onClick={() => {
+        <button style={{padding: '20px 60px',border: 'none', borderRadius: '20px', backgroundColor: 'blue', color: 'white'}} onClick={() => {
           window.location.reload()
         }}>Restart</button>
       </div>
@@ -80,7 +77,7 @@ function App() {
           <div style={{height: '10px', width: '250px', backgroundColor: 'black'}}></div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center',  gap: '.70em', fontSize: '6rem', fontWeight: 'bold', textTransform: 'uppercase', fontFamily: 'monospace', marginTop: '30px'}}>
+        <div className='sm:text-2xl lg:text-8xl gap-2 sm:gap-4 md:gap-8 lg:gap-16'  style={{ display: 'flex', alignItems: 'center',  fontSize: '6rem',  fontWeight: 'bold', textTransform: 'uppercase', fontFamily: 'monospace', marginTop: '30px'}}>
           {word.map((letter) => (
             <span style={{fontSize: '30px', borderBottom: '.15em solid black'}}>
               <span style={{visibility: guessedLetters.includes(letter) ? 'visible' : 'hidden'}}>{letter}</span>
@@ -89,16 +86,18 @@ function App() {
         </div>
 
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(75px, 1fr))', gap: '.5rem', alignSelf: 'stretch', margin: '50px 200px'}}>
+        <div className='sm:mx-7 mx-5 md:mx-20 lg:mx-60' style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(75px, 1fr))', gap: '.5rem', alignSelf: 'stretch', marginTop: '50px'}}>
           {letters.map((key) => (
             <button onClick={(e) => {
-              e.target.style.opacity = '0.3';
+              if (word.includes(key)) {
+                e.target.className = 'active'
+              } else {
+                e.target.className = 'inactive'
+              }
               if (!guessedLetters.includes(key)) {
                 setGuessedLetters(currentLetters => [...currentLetters, key])
               }
-             
-              
-            }} disabled={isWinner || isLooser} key={key} style={{padding: '5px', backgroundColor: 'grey', color: 'white'}}>{key }</button>
+            }} disabled={isWinner || isLooser} key={key} style={{padding: '5px',  textTransform: 'uppercase', border: '3px solid black', color: 'black', fontWeight: 'bold', cursor: 'pointer', fontSize: '30px'}}>{key }</button>
             ))}
         </div>
 
