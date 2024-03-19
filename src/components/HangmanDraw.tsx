@@ -1,4 +1,9 @@
-function HangmanDraw({incorectletters}) {
+type HangmanDrawProps = {
+    incorectletters : string[]
+}
+
+function HangmanDraw({ incorectletters }: 
+HangmanDrawProps) {
     
     const head = (
         <div className='border-10 border-solid border-black rounded-full w-50 h-50 absolute top-50px -right-5'></div> 

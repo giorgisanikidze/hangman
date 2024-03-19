@@ -9,13 +9,13 @@ import WinnerOrLooser from './components/WinnerOrLooser';
 function App() {
   const wordToGuess = useState(words[Math.floor(Math.random() * words.length)])
   const splitedWord = wordToGuess[0].split('')
-  const [guessedLetters, setGuessedLetters] = useState([])
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([])
 
   const incorectletters = guessedLetters.filter(
     letter => !splitedWord.includes(letter)
   )
   const isLooser = incorectletters.length === 6
-  const isWinner = splitedWord.every(letter => 
+  const isWinner = splitedWord.every((letter: string) => 
     guessedLetters.includes(letter)
   )
 

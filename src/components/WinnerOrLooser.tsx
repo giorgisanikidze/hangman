@@ -1,4 +1,10 @@
-function WinnerOrLooser({isLooser, isWinner, wordToGuess}) {
+type WinnerOrLooserProps = {
+    isLooser: boolean,
+    isWinner: boolean,
+    wordToGuess :[string, React.Dispatch<React.SetStateAction<string>>]
+}
+
+function WinnerOrLooser({ isLooser, isWinner, wordToGuess } : WinnerOrLooserProps) {
     return (
         <div className={`${isLooser || isWinner ? 'flex' : 'hidden'} rounded-20 gap-30 flex-col justify-center items-center absolute bg-green-600 w-500px h-500px top-2/4 left-2/4 -translate-x-2/4 -translate-y-2/4 z-10 p-5`} >
             <h1 className='size-5xl'>
